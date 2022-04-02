@@ -29,12 +29,12 @@ void setup()
 {
     Serial.begin(115200);
     long sum = 0;
-
+  //Serial.println("setUp");
     for(int i=0; i<=10; i++)
     {
         for(int j=0; j<100; j++)
         {
-            sum += getAnalog(A0);
+            sum += getAnalog(A7);
             delay(1);
         }
         
@@ -47,17 +47,17 @@ void setup()
 
     Serial.print("static_analog_dta = ");
     Serial.println(static_analog_dta);
-    
+   // pinMode(20,OUTPUT);
 }
 
 int level       = 5;
 int level_buf   = 5;
 void loop()
 {
-
-    int val = getAnalog(A0);   // get Analog value
-    //Serial.print("A0=");
-    //Serial.println(analogRead(A0));
+//digitalWrite(20,HIGH);
+    int val = getAnalog(A7);   // get Analog value
+    //Serial.print("A1= ");
+    //Serial.println(analogRead(A7));
     //Serial.print("A1=");
     //Serial.println(analogRead(A1));
     
@@ -66,6 +66,7 @@ void loop()
     if(val>static_analog_dta)                   // larger than static_analog_dta
     {
         level2 = 5 + map(val, static_analog_dta, max_analog_dta, 0, 5);
+        
     }
     else 
     {
@@ -88,6 +89,8 @@ void loop()
         
         //bar.setLevel(level);
     }
+    //this is where you should be reading the values from in the code, if you do it anywhere else it gives garabage values
+    //level is the variable that needs to be transfered, it has a range of 1-10
     Serial.println(level);
     delay(10);
 }
